@@ -1,0 +1,32 @@
+dht:
+  # Tên logic của node này (dùng để tính nodeId = hash(name))
+  name: nodeA
+  # Cổng TCP mà node lắng nghe kết nối từ các node khác
+  port: 5001
+  # Kích thước ring (M bits) – mặc định 8 → ID space [0, 255], dễ đọc log
+  m: 8
+  # Số lượng successor tối đa trong successor list (r) – dùng cho fault tolerance
+  successor-list-size: 3
+  # Chu kỳ re-register keys (giây) – để phục hồi khi node chịu trách nhiệm thay đổi
+  reregister-interval-seconds: 30
+  bootstrap:
+    # Để trống nếu node này là bootstrap (node đầu tiên trong ring)
+    host: ""
+    port: 0
+
+# Tắt banner Spring Boot cho gọn
+spring:
+  main:
+    banner-mode: off
+
+# Endpoint actuator (tùy chọn)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+logging:
+  level:
+    dht: INFO
+    org.springframework: WARN
