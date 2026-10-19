@@ -1,0 +1,52 @@
+[SYSTEM] Started P1 at 127.0.0.1:63124
+[SYSTEM] Started P2 at 127.0.0.1:63125
+[SYSTEM] Started P3 at 127.0.0.1:63126
+[SYSTEM] Started P4 at 127.0.0.1:63127
+[SYSTEM] Started P5 at 127.0.0.1:63128
+[SYSTEM] Initial coordinator: P5. TCP heartbeat every 300ms.
+[SYSTEM] Active Leader P5 terminated.
+[P2] Timeout detected! Leader P5 unreachable.
+[P2] Initiating Election... (leader heartbeat failed)
+[P2] Send ELECTION -> P3
+[P2] Send ELECTION -> P4
+[P2] Send ELECTION -> P5
+[P3] Timeout detected! Leader P5 unreachable.
+[P3] Initiating Election... (leader heartbeat failed)
+[P3] Send ELECTION -> P4
+[P3] Send ELECTION -> P5
+[P3] Recv ELECTION from P2 -> Reply OK
+[P1] Timeout detected! Leader P5 unreachable.
+[P1] Initiating Election... (leader heartbeat failed)
+[P4] Timeout detected! Leader P5 unreachable.
+[P2] Recv OK from P3
+[P1] Send ELECTION -> P2
+[P1] Send ELECTION -> P3
+[P1] Send ELECTION -> P4
+[P1] Send ELECTION -> P5
+[P4] Initiating Election... (leader heartbeat failed)
+[P4] Send ELECTION -> P5
+[P4] Recv ELECTION from P2 -> Reply OK
+[P4] Recv ELECTION from P3 -> Reply OK
+[P2] Recv ELECTION from P1 -> Reply OK
+[P3] Recv ELECTION from P1 -> Reply OK
+[P3] Recv OK from P4
+[P4] Recv ELECTION from P1 -> Reply OK
+[P2] Recv OK from P4
+[P1] Recv OK from P2
+[P1] Recv OK from P4
+[P1] Recv OK from P3
+[P1] Higher ID replied OK -> waiting for COORDINATOR
+[P4] Timeout waiting for higher IDs -> NEW LEADER!
+[P4] Broadcast COORDINATOR victory -> P1
+[P4] Broadcast COORDINATOR victory -> P2
+[P2] Higher ID replied OK -> waiting for COORDINATOR
+[P4] Broadcast COORDINATOR victory -> P3
+[P3] Higher ID replied OK -> waiting for COORDINATOR
+[P3] Recv COORDINATOR from P4 -> Leader P4
+[P1] Recv COORDINATOR from P4 -> Leader P4
+[P2] Recv COORDINATOR from P4 -> Leader P4
+[VERIFY] P1 recognizes leader P4
+[VERIFY] P2 recognizes leader P4
+[VERIFY] P3 recognizes leader P4
+[VERIFY] P4 recognizes leader P4
+[VERIFY] PASS: P5 stopped; P1..P4 elected stable leader P4 automatically.
