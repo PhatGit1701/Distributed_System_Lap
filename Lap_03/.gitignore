@@ -1,0 +1,11 @@
+# Java
+*.class
+target/
+out/
+
+# IDE
+.idea/
+.vscode/
+
+# Environment & secrets
+.env

@@ -1,0 +1,8 @@
+vn\edu\distributed\VectorClockTest$TickTests.class
+vn\edu\distributed\VectorClockTest$HappensBeforeTests.class
+vn\edu\distributed\VectorClockTest$MergeTests.class
+vn\edu\distributed\VectorClockTest$IsConcurrentTests.class
+vn\edu\distributed\LamportClockTest.class
+vn\edu\distributed\VectorClockTest$LeqTests.class
+vn\edu\distributed\ScenarioTest.class
+vn\edu\distributed\VectorClockTest.class

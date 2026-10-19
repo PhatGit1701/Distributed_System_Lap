@@ -1,0 +1,7 @@
+vn\edu\distributed\EventRegistry.class
+vn\edu\distributed\Main.class
+vn\edu\distributed\Logger.class
+vn\edu\distributed\LamportClock.class
+vn\edu\distributed\Process.class
+vn\edu\distributed\VectorClock.class
+vn\edu\distributed\Message.class
