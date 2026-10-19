@@ -1,0 +1,6 @@
+{"tx_id":101,"event":"VOTE_ABORT"}
+{"tx_id":101,"event":"GLOBAL_ABORT"}
+{"tx_id":102,"event":"VOTE_COMMIT"}
+{"tx_id":102,"event":"GLOBAL_COMMIT"}
+{"tx_id":103,"event":"VOTE_COMMIT"}
+{"tx_id":103,"event":"GLOBAL_COMMIT"}

@@ -1,0 +1,74 @@
+[P1] Socket server 127.0.0.1:59951 | recovered 0 WAL records
+[P2] Socket server 127.0.0.1:59952 | recovered 0 WAL records
+[P3] Socket server 127.0.0.1:59953 | recovered 0 WAL records
+[COORD] Socket server 127.0.0.1:59950 | recovered 0 WAL records
+[SYSTEM] Stable WAL directory: D:\workspace\HeThongPhanTan_LAP\Lap_05\data\run-3572510323
+[SYSTEM] SCENARIO 1: inject P3 lock conflict for Tx 101
+[COORD] Tx 101 Started -> Log START_2PC (Sync)
+[COORD] Tx 101 Multicast VOTE_REQUEST
+[P3] Tx 101 Lock Conflict! (injected or resource busy)
+[P1] Tx 101 Log VOTE_COMMIT (Sync) -> Reply VOTE_COMMIT
+[P2] Tx 101 Log VOTE_COMMIT (Sync) -> Reply VOTE_COMMIT
+[P3] Tx 101 Log VOTE_ABORT (Sync) -> Reply VOTE_ABORT
+[COORD] Tx 101 Recv VOTE_COMMIT from P1
+[COORD] Tx 101 Recv VOTE_COMMIT from P2
+[COORD] Tx 101 Recv VOTE_ABORT from P3
+[COORD] Tx 101 Log GLOBAL_ABORT (Sync)
+[COORD] Tx 101 Multicast GLOBAL_ABORT
+[P2] Tx 101 Recv GLOBAL_ABORT -> Log+Sync -> Rollback -> Reply ACK
+[P3] Tx 101 Recv GLOBAL_ABORT -> Log+Sync -> Rollback -> Reply ACK
+[P1] Tx 101 Recv GLOBAL_ABORT -> Log+Sync -> Rollback -> Reply ACK
+[COORD] Tx 101 Recv ACK from P2
+[COORD] Tx 101 Recv ACK from P3
+[COORD] Tx 101 Recv ACK from P1
+[SYSTEM] Tx 101 Aborted Cleanly.
+[SYSTEM] SCENARIO 2: unanimous YES for Tx 102
+[COORD] Tx 102 Started -> Log START_2PC (Sync)
+[COORD] Tx 102 Multicast VOTE_REQUEST
+[P3] Tx 102 Log VOTE_COMMIT (Sync) -> Reply VOTE_COMMIT
+[P1] Tx 102 Log VOTE_COMMIT (Sync) -> Reply VOTE_COMMIT
+[P2] Tx 102 Log VOTE_COMMIT (Sync) -> Reply VOTE_COMMIT
+[COORD] Tx 102 Recv VOTE_COMMIT from P3
+[COORD] Tx 102 Recv VOTE_COMMIT from P1
+[COORD] Tx 102 Recv VOTE_COMMIT from P2
+[COORD] Tx 102 Log GLOBAL_COMMIT (Sync)
+[COORD] Tx 102 Multicast GLOBAL_COMMIT
+[P2] Tx 102 Recv GLOBAL_COMMIT -> Log+Sync -> Commit -> Reply ACK
+[P3] Tx 102 Recv GLOBAL_COMMIT -> Log+Sync -> Commit -> Reply ACK
+[P1] Tx 102 Recv GLOBAL_COMMIT -> Log+Sync -> Commit -> Reply ACK
+[COORD] Tx 102 Recv ACK from P2
+[COORD] Tx 102 Recv ACK from P3
+[COORD] Tx 102 Recv ACK from P1
+[SYSTEM] Tx 102 Committed Cleanly.
+[SYSTEM] SCENARIO 3: crash/reboot P2 while PREPARED in Tx 103
+[COORD] Tx 103 Started -> Log START_2PC (Sync)
+[COORD] Tx 103 Multicast VOTE_REQUEST
+[P2] Tx 103 Log VOTE_COMMIT (Sync) -> Reply VOTE_COMMIT
+[P1] Tx 103 Log VOTE_COMMIT (Sync) -> Reply VOTE_COMMIT
+[P3] Tx 103 Log VOTE_COMMIT (Sync) -> Reply VOTE_COMMIT
+[COORD] Tx 103 Recv VOTE_COMMIT from P2
+[COORD] Tx 103 Recv VOTE_COMMIT from P1
+[COORD] Tx 103 Recv VOTE_COMMIT from P3
+[COORD] Tx 103 Log GLOBAL_COMMIT (Sync)
+[SYSTEM] P2 terminated after durable VOTE_COMMIT, before GLOBAL_COMMIT delivery.
+[COORD] Tx 103 Multicast GLOBAL_COMMIT
+[P3] Tx 103 Recv GLOBAL_COMMIT -> Log+Sync -> Commit -> Reply ACK
+[P1] Tx 103 Recv GLOBAL_COMMIT -> Log+Sync -> Commit -> Reply ACK
+[COORD] Tx 103 Missing ACK from P2 -> decision remains GLOBAL_COMMIT; retry after recovery
+[COORD] Tx 103 Recv ACK from P3
+[COORD] Tx 103 Recv ACK from P1
+[SYSTEM] Reboot P2: create a NEW object from the SAME WAL file.
+[P2] Socket server 127.0.0.1:59952 | recovered 5 WAL records
+[P2] Recovery Tx 103: VOTE_COMMIT -> ask coordinator via TCP
+[COORD] Recovery query Tx 103 -> GLOBAL_COMMIT
+[P2] Tx 103 Recv GLOBAL_COMMIT -> Log+Sync -> Commit -> Reply ACK
+[COORD] Tx 103 Retry -> keep durable GLOBAL_COMMIT
+[COORD] Tx 103 Multicast GLOBAL_COMMIT
+[P3] Tx 103 Duplicate GLOBAL_COMMIT -> Reply ACK (no second apply)
+[P1] Tx 103 Duplicate GLOBAL_COMMIT -> Reply ACK (no second apply)
+[P2] Tx 103 Duplicate GLOBAL_COMMIT -> Reply ACK (no second apply)
+[COORD] Tx 103 Recv ACK from P1
+[COORD] Tx 103 Recv ACK from P3
+[COORD] Tx 103 Recv ACK from P2
+[SYSTEM] Tx 103 Recovered Cleanly. All participants GLOBAL_COMMIT.
+[VERIFY] PASS: ABORT, COMMIT, durable WAL and participant reboot recovery.

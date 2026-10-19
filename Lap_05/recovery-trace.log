@@ -1,0 +1,29 @@
+[P1] Socket server 127.0.0.1:49717 | recovered 6 WAL records
+[P2] Socket server 127.0.0.1:49719 | recovered 6 WAL records
+[P3] Socket server 127.0.0.1:49720 | recovered 6 WAL records
+[COORD] Socket server 127.0.0.1:49716 | recovered 6 WAL records
+[COORD] Tx 101 Retry -> keep durable GLOBAL_ABORT
+[COORD] Tx 101 Multicast GLOBAL_ABORT
+[P2] Tx 101 Duplicate GLOBAL_ABORT -> Reply ACK (no second apply)
+[P3] Tx 101 Duplicate GLOBAL_ABORT -> Reply ACK (no second apply)
+[P1] Tx 101 Duplicate GLOBAL_ABORT -> Reply ACK (no second apply)
+[COORD] Tx 101 Recv ACK from P2
+[COORD] Tx 101 Recv ACK from P3
+[COORD] Tx 101 Recv ACK from P1
+[COORD] Tx 102 Retry -> keep durable GLOBAL_COMMIT
+[COORD] Tx 102 Multicast GLOBAL_COMMIT
+[P2] Tx 102 Duplicate GLOBAL_COMMIT -> Reply ACK (no second apply)
+[P3] Tx 102 Duplicate GLOBAL_COMMIT -> Reply ACK (no second apply)
+[P1] Tx 102 Duplicate GLOBAL_COMMIT -> Reply ACK (no second apply)
+[COORD] Tx 102 Recv ACK from P3
+[COORD] Tx 102 Recv ACK from P2
+[COORD] Tx 102 Recv ACK from P1
+[COORD] Tx 103 Retry -> keep durable GLOBAL_COMMIT
+[COORD] Tx 103 Multicast GLOBAL_COMMIT
+[P3] Tx 103 Duplicate GLOBAL_COMMIT -> Reply ACK (no second apply)
+[P2] Tx 103 Duplicate GLOBAL_COMMIT -> Reply ACK (no second apply)
+[P1] Tx 103 Duplicate GLOBAL_COMMIT -> Reply ACK (no second apply)
+[COORD] Tx 103 Recv ACK from P2
+[COORD] Tx 103 Recv ACK from P3
+[COORD] Tx 103 Recv ACK from P1
+[VERIFY] PASS: reboot replay and decision redelivery completed.

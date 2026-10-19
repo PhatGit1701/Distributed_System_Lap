@@ -1,0 +1,6 @@
+{"tx_id":101,"event":"START_2PC","participants":[1,2,3]}
+{"tx_id":101,"event":"GLOBAL_ABORT"}
+{"tx_id":102,"event":"START_2PC","participants":[1,2,3]}
+{"tx_id":102,"event":"GLOBAL_COMMIT"}
+{"tx_id":103,"event":"START_2PC","participants":[1,2,3]}
+{"tx_id":103,"event":"GLOBAL_COMMIT"}
