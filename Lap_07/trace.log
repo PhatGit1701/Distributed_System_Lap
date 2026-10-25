@@ -1,0 +1,23 @@
+[SYSTEM] S1 TCP server 127.0.0.1:58336
+[SYSTEM] S2 TCP server 127.0.0.1:58337
+[SYSTEM] S3 TCP server 127.0.0.1:58338
+[SYSTEM] Async replication interval 3s; session starts at [0 0 0].
+[CLIENT] Write key="profile" value="Alice" -> S1
+[S1] Write ACK | V_write=[1 0 0]
+[SYSTEM] Route the same client to stale S2: Read-Your-Writes check
+[PROXY] Validation Failed! S2 clock [0 0 0] does not dominate session requirement [1 0 0]
+[PROXY] Fetch write-set S1:1 from S1 -> S2
+[S2] Write-sets applied; clock [1 0 0]
+[CLIENT] Read S2 key="profile" -> "Alice" found=true | V_read=[1 0 0]
+[VERIFY] Read-Your-Writes preserved!
+[CLIENT] Write key="profile" value="Bob" -> S2
+[S2] Write ACK | V_write=[1 1 0]
+[CLIENT] Read S2 key="profile" -> "Bob" found=true | V_read=[1 1 0]
+[SYSTEM] Route client to stale S3: Monotonic Reads check
+[PROXY] Validation Failed! S3 clock [0 0 0] does not dominate session requirement [1 1 0]
+[PROXY] Fetch write-set S1:1 from S1 -> S3
+[PROXY] Fetch write-set S2:1 from S2 -> S3
+[S3] Write-sets applied; clock [1 1 0]
+[CLIENT] Read S3 key="profile" -> "Bob" found=true | V_read=[1 1 0]
+[VERIFY] Monotonic Reads preserved! V_read=[1 1 0] V_write=[1 0 0]
+[VERIFY] PASS: vector validation, missing write-set fetching and both session guarantees.

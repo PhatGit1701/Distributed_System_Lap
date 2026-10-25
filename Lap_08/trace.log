@@ -1,0 +1,44 @@
+[SYSTEM] Started S1 PID=1908 TCP=127.0.0.1:58357
+[SYSTEM] Started S2 PID=13392 TCP=127.0.0.1:58358
+[SYSTEM] Started S3 PID=4620 TCP=127.0.0.1:58359
+[SYSTEM] Started S4 PID=25540 TCP=127.0.0.1:58360
+[SYSTEM] Started S5 PID=15192 TCP=127.0.0.1:58361
+[SYSTEM] N=5 NR=3 NW=3. Background gossip paused for controlled divergence.
+[QUORUM] Read response S1 ver=0 tombstone=false
+[QUORUM] Read response S2 ver=0 tombstone=false
+[QUORUM] Read response S3 ver=0 tombstone=false
+[CLIENT] Write key="user1" val="Bob" tombstone=false (NW=3) ver=1
+[S1] Write ACK key="user1" ver=1 tombstone=false
+[S2] Write ACK key="user1" ver=1 tombstone=false
+[S3] Write ACK key="user1" ver=1 tombstone=false
+[SYSTEM] Write committed to quorum: 3/3 ACKs
+[SYSTEM] S1 ver=1 (quorum write may leave other replicas stale)
+[SYSTEM] S2 ver=1 (quorum write may leave other replicas stale)
+[SYSTEM] S3 ver=1 (quorum write may leave other replicas stale)
+[SYSTEM] S4 ver=0 (quorum write may leave other replicas stale)
+[SYSTEM] S5 ver=0 (quorum write may leave other replicas stale)
+[GOSSIP] S3 Push-Pull Anti-Entropy with S4 completed
+[GOSSIP] S4 Push-Pull Anti-Entropy with S5 completed
+[VERIFY] Push-Pull synchronized Bob to S4 and S5.
+[QUORUM] Read response S1 ver=1 tombstone=false
+[QUORUM] Read response S2 ver=1 tombstone=false
+[QUORUM] Read response S3 ver=1 tombstone=false
+[CLIENT] Write key="user1" val="" tombstone=true (NW=3) ver=2
+[S1] Write ACK key="user1" ver=2 tombstone=true
+[S2] Write ACK key="user1" ver=2 tombstone=true
+[S3] Write ACK key="user1" ver=2 tombstone=true
+[SYSTEM] Write committed to quorum: 3/3 ACKs
+[CLIENT] Delete user1 -> Tombstone ver=2
+[GOSSIP] S5 Push-Pull Anti-Entropy with S1 completed
+[VERIFY] Old Bob cannot overwrite newer tombstone.
+[SYSTEM] Enable periodic random-peer gossip every 2s.
+[GOSSIP] S1 Push-Pull Anti-Entropy with S3 completed
+[GOSSIP] S2 Push-Pull Anti-Entropy with S4 completed
+[GOSSIP] S3 Push-Pull Anti-Entropy with S1 completed
+[QUORUM] Read response S1 ver=2 tombstone=true
+[QUORUM] Read response S2 ver=2 tombstone=true
+[QUORUM] Read response S3 ver=2 tombstone=true
+[CLIENT] Read "user1" -> value="" ver=2 deleted=true
+[SYSTEM] All 5 replica processes converged via tombstone gossip.
+[GOSSIP] S4 Push-Pull Anti-Entropy with S2 completed
+[VERIFY] PASS: Gifford quorum, push-pull and no resurrection.
